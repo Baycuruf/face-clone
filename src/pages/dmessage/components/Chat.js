@@ -21,22 +21,23 @@ export const Chat = ({ room }) => {
   
 
   useEffect(() => {
-    const queryMessages = query(
-      messagesRef,
-      where("room", "==", room),
-      orderBy("createdAt")
-    );
-    const unsuscribe = onSnapshot(queryMessages, (snapshot) => {
-      let messages = [];
-      snapshot.forEach((doc) => {
-        messages.push({ ...doc.data(), id: doc.id });
-      });
-      
-      setMessages(messages);
-    });
+  const queryMessages = query(
+    messagesRef,
+    where("room", "==", room),
+    orderBy("createdAt")
+  );
 
-    return () => unsuscribe();
-  }, [room]);
+  const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
+    let messages = [];
+    snapshot.forEach((doc) => {
+      messages.push({ ...doc.data(), id: doc.id });
+    });
+    
+    setMessages(messages);
+  });
+
+  return () => unsubscribe();
+}, [room]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
