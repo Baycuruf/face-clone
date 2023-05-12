@@ -37,6 +37,7 @@ export const Chat = ({ room }) => {
   });
 
   return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [room]);
 
   const handleSubmit = async (event) => {
