@@ -36,7 +36,7 @@ function ChatApp() {
     };
 
     fetchRooms();
-  }, []);
+  }, [messagesRef]);
 
   const odayaGir = (room) => {
     setIsInChat(true);
